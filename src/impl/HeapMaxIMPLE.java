@@ -77,17 +77,17 @@ public class HeapMaxIMPLE implements HeapMaxTDA {
 	public int extraerMax() {
 		// trae del maximo el elemento
 		int maximo = 0;
-		if (tamano>=0) {
-			maximo=heap[0][HeapMaxIMPLE.elemento];
+		if (tamano >= 0) {
+			maximo = heap[0][HeapMaxIMPLE.elemento];
 			// remplaza el maximo por el enesimo elemento
-			heap[0][HeapMaxIMPLE.prioridad] = heap[tamano-1][HeapMaxIMPLE.prioridad];
-			heap[0][HeapMaxIMPLE.elemento] = heap[tamano-1][HeapMaxIMPLE.elemento];
+			heap[0][HeapMaxIMPLE.prioridad] = heap[tamano - 1][HeapMaxIMPLE.prioridad];
+			heap[0][HeapMaxIMPLE.elemento] = heap[tamano - 1][HeapMaxIMPLE.elemento];
 			tamano--;
 			// se hunde el elemento root para respetar la condición de heap
 			hundirElemento(0);
-		}else {
+		} else {
 			System.out.println("Heap vacio");
-		}		
+		}
 		return maximo;
 	}
 
@@ -106,8 +106,51 @@ public class HeapMaxIMPLE implements HeapMaxTDA {
 		return 2 * index + 2;
 	}
 
+	// hunde el elemento a partir de una posición del arreglo dada
 	private void hundirElemento(int index) {
+
+		// Obtengo la posicion de los hijos
+		int izquierdo = hijoIzq(index);
+		int derecho = hijoDer(index);
+
+		// se guarda la posición del supuesto maximo.
+		int posicionMaximo = index;
+
+		// se comparan las prioridades del elemento con su hijo izquerdo
+		// se verifica ademas que los hijos existan dentro del los elementos ingresados
+		// al heap
+		// MAXIMO > TAMANO por lo tanto al calcular izq y derecho hay que verificar que
+		// esten dentro de Tamano
+		if (izquierdo <= tamano
+				&& heap[izquierdo][HeapMaxIMPLE.prioridad] > heap[posicionMaximo][HeapMaxIMPLE.prioridad]) {
+			// en caso de que se cumpla que la prioridad izquierda es mayor, la posicion de
+			// maximo la ocupa el izquierdo
+			posicionMaximo = izquierdo;
+		}
+
+		// se comparan las prioridades del elemento con su hijo derecho
+		// En caso de que se cumpla que el izquierdo es mayor se comparara al izquerdo con el derecho
+		if (derecho <= tamano && heap[derecho][HeapMaxIMPLE.prioridad] > heap[posicionMaximo][HeapMaxIMPLE.prioridad]) {
+			// en caso de que se cumpla que la prioridad izquierda es mayor, la posicion de
+			// maximo la ocupa el derecho
+			posicionMaximo = derecho;
+		}
 		
+		// si la posición de maximo cambio
+		// Rotan los valores del root con el hijo que sea mayor
+		if(posicionMaximo!=index) {
+			int auxPrioridad = heap[index][HeapMaxIMPLE.prioridad];
+			int auxValor = heap[index][HeapMaxIMPLE.elemento];
+			// el nuevo maximo se posiciona en la raiz
+			heap[index][HeapMaxIMPLE.prioridad] = heap[posicionMaximo][HeapMaxIMPLE.prioridad];
+			heap[index][HeapMaxIMPLE.elemento] = heap[posicionMaximo][HeapMaxIMPLE.elemento];
+			// el maximo anterior se posiciona en la posición donde se obtuvo el nuevo maximo
+			heap[posicionMaximo][HeapMaxIMPLE.prioridad] = auxPrioridad;
+			heap[posicionMaximo][HeapMaxIMPLE.elemento] = auxValor;
+			// se repite recursivamente con el elemento hundido en su nueva posicion
+			hundirElemento(posicionMaximo);
+		}
+
 	}
 
 }
