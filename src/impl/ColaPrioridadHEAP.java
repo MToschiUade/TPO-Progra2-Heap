@@ -4,6 +4,7 @@
 package impl;
 
 import api.ColaPrioridadTDA;
+import api.HeapMaxTDA;
 
 /**
  * @author mtoschi
@@ -11,42 +12,40 @@ import api.ColaPrioridadTDA;
  */
 public class ColaPrioridadHEAP implements ColaPrioridadTDA {
 
-	
+	HeapMaxTDA cola;
+	private int LONGITUD = 15;
 	
 	@Override
 	public void InicializarCola() {
-		// TODO Auto-generated method stub
-
+		cola = new HeapMaxIMPLE();
+		cola.inicializarHeap(LONGITUD);
 	}
 
 	@Override
 	public void AcolarPrioridad(int x, int prioridad) {
-		// TODO Auto-generated method stub
-
+		cola.insertar(x, prioridad);
 	}
 
 	@Override
 	public void Desacolar() {
-		// TODO Auto-generated method stub
-
+		cola.extraerMax();
 	}
 
 	@Override
 	public boolean ColaVacia() {
-		// TODO Auto-generated method stub
-		return false;
+		return cola.vacio() ;
 	}
 
 	@Override
 	public int Primero() {
 		// TODO Auto-generated method stub
-		return 0;
+		return cola.obtenerMax();
 	}
 
 	@Override
 	public int Prioridad() {
 		// TODO Auto-generated method stub
-		return 0;
+		return cola.prioridad();
 	}
 
 }

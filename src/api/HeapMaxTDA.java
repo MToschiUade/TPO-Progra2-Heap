@@ -16,6 +16,8 @@ public interface HeapMaxTDA {
 	
 	// public int primero();
 	
-	// public int prioridad();
+	public int prioridad();
+	
+	public boolean vacio();
 	
 }

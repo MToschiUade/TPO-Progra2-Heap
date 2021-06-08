@@ -153,6 +153,18 @@ public class HeapMaxIMPLE implements HeapMaxTDA {
 
 	}
 
+	@Override
+	public int prioridad() {
+		// TODO Auto-generated method stub
+		return heap[0][HeapMaxIMPLE.prioridad];
+	}
+
+	@Override
+	public boolean vacio() {
+		// TODO Auto-generated method stub
+		return (tamano<=0);
+	}
+
 }
 
 // Se utilizo de referencia https://algorithmtutor.com/Data-Structures/Tree/Binary-Heaps/
