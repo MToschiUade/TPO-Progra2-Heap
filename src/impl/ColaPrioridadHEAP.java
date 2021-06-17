@@ -4,7 +4,7 @@
 package impl;
 
 import api.ColaPrioridadTDA;
-import api.HeapMaxTDA;
+import api.HeapMaxColaPrioridadTDA;
 
 /**
  * @author mtoschi
@@ -12,7 +12,7 @@ import api.HeapMaxTDA;
  */
 public class ColaPrioridadHEAP implements ColaPrioridadTDA {
 
-	HeapMaxTDA cola;
+	HeapMaxColaPrioridadTDA cola;
 	private int LONGITUD = 15;
 	
 	@Override

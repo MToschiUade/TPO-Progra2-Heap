@@ -1,8 +1,8 @@
 package impl;
 
-import api.HeapMaxTDA;
+import api.HeapMaxColaPrioridadTDA;
 
-public class HeapMaxIMPLE implements HeapMaxTDA {
+public class HeapMaxIMPLE implements HeapMaxColaPrioridadTDA {
 
 	// con estas variables estaticas indico que obtengo de la matriz si la prioridad
 	// o el valor del elemento
@@ -10,6 +10,7 @@ public class HeapMaxIMPLE implements HeapMaxTDA {
 	private static int elemento = 1;
 	private int tamano;
 	private int maximo;
+	// el primer [] indica la posición de elemento el segundo [] indica que obtengo de este elemento
 	private int heap[][];
 
 	@Override
@@ -27,7 +28,7 @@ public class HeapMaxIMPLE implements HeapMaxTDA {
 	@Override
 	public int obtenerMax() {
 		// retorna de la primer posicion el elemento
-		return heap[0][elemento];
+		return heap[0][HeapMaxIMPLE.elemento];
 	}
 
 	@Override
@@ -39,12 +40,16 @@ public class HeapMaxIMPLE implements HeapMaxTDA {
 		}
 		// sino inserta normalmente
 		// inserta en la ultima posición disponible
+//		if (existePrioridad(prioridad)) {
+//			// verificar prioridad
+//		}
 		heap[tamano][HeapMaxIMPLE.prioridad] = prioridad;
 		heap[tamano][HeapMaxIMPLE.elemento] = valor;
 		// sumador que desplaza el tamaño actual, indicando que hay un elemento nuevo en
 		// el heap
 		tamano++;
 
+		// esto es que pasa si tengo que rotar
 		// obtenemos la posicion donde se guardo el nuevo elemento insertado
 		int posicion = tamano - 1;
 
@@ -77,7 +82,7 @@ public class HeapMaxIMPLE implements HeapMaxTDA {
 	public int extraerMax() {
 		// trae del maximo el elemento
 		int maximo = 0;
-		if (tamano >= 0) {
+		if (tamano > 0) {
 			maximo = heap[0][HeapMaxIMPLE.elemento];
 			// remplaza el maximo por el enesimo elemento
 			heap[0][HeapMaxIMPLE.prioridad] = heap[tamano - 1][HeapMaxIMPLE.prioridad];
@@ -164,6 +169,10 @@ public class HeapMaxIMPLE implements HeapMaxTDA {
 		// TODO Auto-generated method stub
 		return (tamano<=0);
 	}
+	
+//	private boolean existePrioridad(int prioridad) {
+//		return false;
+//	}
 
 }
 
